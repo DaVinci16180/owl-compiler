@@ -6,7 +6,7 @@ O objetivo do presente projeto é construir um compilador para a linguagem OWL (
 
 Por conveniência, o arquivo executável do projeto está incluso no diretório Build. Para executá-lo, basta executar o comando `Build/analyzer` na raiz do projeto, ou `Build/analyzer < test.txt`, para executar com o arquivo de teste.
 
-Para criar o executável do programa é necessário realizar a build usando o Make ou o CMake.
+Para criar o executável do programa é necessário realizar a build da aplicação usando o Make ou o CMake.
 
 ## Make
 
