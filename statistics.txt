@@ -1,0 +1,126 @@
+########################
+#  Tabela de tokens   
+########################
+
+_______________________________________________
+|      Token      |           Value           |
+-----------------------------------------------
+| SOME            | some                      |
+| VALUE           | value                     |
+| MIN             | min                       |
+| AND             | and                       |
+| OR              | or                        |
+| ONLY            | only                      |
+| CLASS           | Class:                    |
+| EQUIVALENTTO    | EquivalentTo:             |
+| INDIVIDUALS     | Individuals:              |
+| SUBCLASSOF      | SubClassOf:               |
+| DISJOINTCLASSES | DisjointClasses:          |
+| CLASS_ID        | OliveTopping              |
+| CLASS_ID        | MargheritaPizza           |
+| CLASS_ID        | Pizza                     |
+| CLASS_ID        | PizzaBase                 |
+| CLASS_ID        | SohoPizza                 |
+| CLASS_ID        | Person                    |
+| CLASS_ID        | AmericanaPizza            |
+| CLASS_ID        | PizzaTopping              |
+| CLASS_ID        | CheesyPizza               |
+| CLASS_ID        | Spiciness                 |
+| CLASS_ID        | Chef                      |
+| CLASS_ID        | Customer                  |
+| CLASS_ID        | Manager                   |
+| CLASS_ID        | HighCaloriePizza          |
+| CLASS_ID        | CheeseTopping             |
+| CLASS_ID        | InterestingPizza          |
+| CLASS_ID        | NamedPizza                |
+| CLASS_ID        | AmericanaHotPizza         |
+| CLASS_ID        | JalapenoPepperTopping     |
+| CLASS_ID        | MozzarellaTopping         |
+| CLASS_ID        | PepperoniTopping          |
+| CLASS_ID        | Medium                    |
+| CLASS_ID        | Employee                  |
+| CLASS_ID        | TomatoTopping             |
+| CLASS_ID        | Mild                      |
+| CLASS_ID        | ParmesanTopping           |
+| CLASS_ID        | SpicyPizza                |
+| CLASS_ID        | Hot                       |
+| CLASS_ID        | VegetarianPizza           |
+| CLASS_ID        | LowCaloriePizza           |
+| CLASS_ID        | VegetableTopping          |
+| PROP_ID         | hasSpiciness              |
+| PROP_ID         | hasTopping                |
+| PROP_ID         | hasBase                   |
+| PROP_ID         | hasCaloricContent         |
+| PROP_ID         | purchasedPizza            |
+| PROP_ID         | hasPhone                  |
+| PROP_ID         | ssn                       |
+| INDIVIDUAL_ID   | Customer8                 |
+| INDIVIDUAL_ID   | Customer1                 |
+| INDIVIDUAL_ID   | AmericanaHotPizza1        |
+| INDIVIDUAL_ID   | Customer6                 |
+| INDIVIDUAL_ID   | SohoPizza2                |
+| INDIVIDUAL_ID   | SohoPizza1                |
+| INDIVIDUAL_ID   | Customer3                 |
+| INDIVIDUAL_ID   | CheesyPizza1              |
+| INDIVIDUAL_ID   | MargheritaPizza1          |
+| INDIVIDUAL_ID   | AmericanaPizza2           |
+| INDIVIDUAL_ID   | CustomPizza2              |
+| INDIVIDUAL_ID   | AmericanaPizza1           |
+| INDIVIDUAL_ID   | ChicagoAmericanaHotPizza1 |
+| INDIVIDUAL_ID   | Waiter1                   |
+| INDIVIDUAL_ID   | Customer2                 |
+| INDIVIDUAL_ID   | Customer9                 |
+| INDIVIDUAL_ID   | Waiter2                   |
+| INDIVIDUAL_ID   | AmericanaHotPizza3        |
+| INDIVIDUAL_ID   | Customer7                 |
+| INDIVIDUAL_ID   | Customer4                 |
+| INDIVIDUAL_ID   | Customer10                |
+| INDIVIDUAL_ID   | CustomPizza1              |
+| INDIVIDUAL_ID   | MargheritaPizza2          |
+| INDIVIDUAL_ID   | AmericanaHotPizza2        |
+| INDIVIDUAL_ID   | Customer5                 |
+| DATA_TYPE       | xsd:integer               |
+| DATA_TYPE       | xsd:string                |
+| CARDINALITY     | 1                         |
+| CARDINALITY     | 3                         |
+| CARDINALITY     | 400                       |
+| PARENTHESES     | (                         |
+| PARENTHESES     | )                         |
+| BRACKETS        | [                         |
+| BRACKETS        | ]                         |
+| BRACES          | }                         |
+| BRACES          | {                         |
+| RELOP           | <                         |
+| RELOP           | >=                        |
+| COMMA           | ,                         |
+-----------------------------------------------
+
+########################
+#  Contagem de tokens   
+########################
+
+_____________________________________
+|      Token      |      Quant      |
+-------------------------------------
+| SOME            | 21              |
+| VALUE           | 1               |
+| MIN             | 2               |
+| AND             | 9               |
+| OR              | 5               |
+| ONLY            | 3               |
+| CLASS           | 17              |
+| EQUIVALENTTO    | 8               |
+| INDIVIDUALS     | 8               |
+| SUBCLASSOF      | 7               |
+| DISJOINTCLASSES | 7               |
+| CLASS_ID        | 86              |
+| PROP_ID         | 27              |
+| INDIVIDUAL_ID   | 25              |
+| DATA_TYPE       | 5               |
+| CARDINALITY     | 4               |
+| PARENTHESES     | 26              |
+| BRACKETS        | 4               |
+| BRACES          | 2               |
+| RELOP           | 2               |
+| COMMA           | 55              |
+-------------------------------------

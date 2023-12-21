@@ -1,0 +1,495 @@
+---------------------
+| CLASS  | CLASS_ID |
+| Class: | Customer |
+---------------------
+-----------------
+| EQUIVALENTTO  |
+| EquivalentTo: |
+-----------------
+------------
+| CLASS_ID |
+|  Person  |
+------------
+----------------------------------------------------------------------
+| AND | PARENTHESES |    PROP_ID     | SOME | CLASS_ID | PARENTHESES |
+| and |      (      | purchasedPizza | some |  Pizza   |      )      |
+----------------------------------------------------------------------
+------------------------------------------------------------------
+| AND | PARENTHESES | PROP_ID  | SOME | DATA_TYPE  | PARENTHESES |
+| and |      (      | hasPhone | some | xsd:string |      )      |
+------------------------------------------------------------------
+----------------
+| INDIVIDUALS  |
+| Individuals: |
+----------------
+-------------------------
+| INDIVIDUAL_ID | COMMA |
+|   Customer1   |   ,   |
+-------------------------
+-------------------------
+| INDIVIDUAL_ID | COMMA |
+|  Customer10   |   ,   |
+-------------------------
+-------------------------
+| INDIVIDUAL_ID | COMMA |
+|   Customer2   |   ,   |
+-------------------------
+-------------------------
+| INDIVIDUAL_ID | COMMA |
+|   Customer3   |   ,   |
+-------------------------
+-------------------------
+| INDIVIDUAL_ID | COMMA |
+|   Customer4   |   ,   |
+-------------------------
+-------------------------
+| INDIVIDUAL_ID | COMMA |
+|   Customer5   |   ,   |
+-------------------------
+-------------------------
+| INDIVIDUAL_ID | COMMA |
+|   Customer6   |   ,   |
+-------------------------
+-------------------------
+| INDIVIDUAL_ID | COMMA |
+|   Customer7   |   ,   |
+-------------------------
+-------------------------
+| INDIVIDUAL_ID | COMMA |
+|   Customer8   |   ,   |
+-------------------------
+-----------------
+| INDIVIDUAL_ID |
+|   Customer9   |
+-----------------
+---------------------
+| CLASS  | CLASS_ID |
+| Class: | Employee |
+---------------------
+---------------
+| SUBCLASSOF  |
+| SubClassOf: |
+---------------
+------------
+| CLASS_ID |
+|  Person  |
+------------
+------------------------------------------------------------------------------
+| AND | PARENTHESES | PROP_ID | MIN | CARDINALITY | DATA_TYPE  | PARENTHESES |
+| and |      (      |   ssn   | min |      1      | xsd:string |      )      |
+------------------------------------------------------------------------------
+----------------
+| INDIVIDUALS  |
+| Individuals: |
+----------------
+--------------------
+| CLASS_ID | COMMA |
+|   Chef   |   ,   |
+--------------------
+--------------------
+| CLASS_ID | COMMA |
+| Manager  |   ,   |
+--------------------
+-------------------------
+| INDIVIDUAL_ID | COMMA |
+|    Waiter1    |   ,   |
+-------------------------
+-----------------
+| INDIVIDUAL_ID |
+|    Waiter2    |
+-----------------
+---------------------
+| CLASS  | CLASS_ID |
+| Class: |  Pizza   |
+---------------------
+---------------
+| SUBCLASSOF  |
+| SubClassOf: |
+---------------
+--------------------------------------
+| PROP_ID | SOME | CLASS_ID  | COMMA |
+| hasBase | some | PizzaBase |   ,   |
+--------------------------------------
+------------------------------------------
+|      PROP_ID      | SOME |  DATA_TYPE  |
+| hasCaloricContent | some | xsd:integer |
+------------------------------------------
+--------------------
+| DISJOINTCLASSES  |
+| DisjointClasses: |
+--------------------
+-------------------------------------------------------
+| CLASS_ID | COMMA | CLASS_ID  | COMMA |   CLASS_ID   |
+|  Pizza   |   ,   | PizzaBase |   ,   | PizzaTopping |
+-------------------------------------------------------
+----------------
+| INDIVIDUALS  |
+| Individuals: |
+----------------
+-------------------------
+| INDIVIDUAL_ID | COMMA |
+| CustomPizza1  |   ,   |
+-------------------------
+-----------------
+| INDIVIDUAL_ID |
+| CustomPizza2  |
+-----------------
+------------------------
+| CLASS  |  CLASS_ID   |
+| Class: | CheesyPizza |
+------------------------
+-----------------
+| EQUIVALENTTO  |
+| EquivalentTo: |
+-----------------
+------------
+| CLASS_ID |
+|  Pizza   |
+------------
+-----------------------------------------------------------------------
+| AND | PARENTHESES |  PROP_ID   | SOME |   CLASS_ID    | PARENTHESES |
+| and |      (      | hasTopping | some | CheeseTopping |      )      |
+-----------------------------------------------------------------------
+----------------
+| INDIVIDUALS  |
+| Individuals: |
+----------------
+-----------------
+| INDIVIDUAL_ID |
+| CheesyPizza1  |
+-----------------
+-----------------------------
+| CLASS  |     CLASS_ID     |
+| Class: | HighCaloriePizza |
+-----------------------------
+-----------------
+| EQUIVALENTTO  |
+| EquivalentTo: |
+-----------------
+------------
+| CLASS_ID |
+|  Pizza   |
+------------
+------------------------------------------------------------------------------------------------------------------------
+| AND | PARENTHESES |      PROP_ID      | SOME |  DATA_TYPE  | BRACKETS | RELOP | CARDINALITY | BRACKETS | PARENTHESES |
+| and |      (      | hasCaloricContent | some | xsd:integer |    [     |  >=   |     400     |    ]     |      )      |
+------------------------------------------------------------------------------------------------------------------------
+-----------------------------
+| CLASS  |     CLASS_ID     |
+| Class: | InterestingPizza |
+-----------------------------
+-----------------
+| EQUIVALENTTO  |
+| EquivalentTo: |
+-----------------
+------------
+| CLASS_ID |
+|  Pizza   |
+------------
+-----------------------------------------------------------------------------------
+| AND | PARENTHESES |  PROP_ID   | MIN | CARDINALITY |   CLASS_ID   | PARENTHESES |
+| and |      (      | hasTopping | min |      3      | PizzaTopping |      )      |
+-----------------------------------------------------------------------------------
+----------------------------
+| CLASS  |    CLASS_ID     |
+| Class: | LowCaloriePizza |
+----------------------------
+-----------------
+| EQUIVALENTTO  |
+| EquivalentTo: |
+-----------------
+------------
+| CLASS_ID |
+|  Pizza   |
+------------
+------------------------------------------------------------------------------------------------------------------------
+| AND | PARENTHESES |      PROP_ID      | SOME |  DATA_TYPE  | BRACKETS | RELOP | CARDINALITY | BRACKETS | PARENTHESES |
+| and |      (      | hasCaloricContent | some | xsd:integer |    [     |   <   |     400     |    ]     |      )      |
+------------------------------------------------------------------------------------------------------------------------
+-----------------------
+| CLASS  |  CLASS_ID  |
+| Class: | NamedPizza |
+-----------------------
+---------------
+| SUBCLASSOF  |
+| SubClassOf: |
+---------------
+------------
+| CLASS_ID |
+|  Pizza   |
+------------
+------------------------------
+| CLASS  |     CLASS_ID      |
+| Class: | AmericanaHotPizza |
+------------------------------
+---------------
+| SUBCLASSOF  |
+| SubClassOf: |
+---------------
+----------------------
+|  CLASS_ID  | COMMA |
+| NamedPizza |   ,   |
+----------------------
+-----------------------------------------------------
+|  PROP_ID   | SOME |       CLASS_ID        | COMMA |
+| hasTopping | some | JalapenoPepperTopping |   ,   |
+-----------------------------------------------------
+-------------------------------------------------
+|  PROP_ID   | SOME |     CLASS_ID      | COMMA |
+| hasTopping | some | MozzarellaTopping |   ,   |
+-------------------------------------------------
+------------------------------------------------
+|  PROP_ID   | SOME |     CLASS_ID     | COMMA |
+| hasTopping | some | PepperoniTopping |   ,   |
+------------------------------------------------
+-------------------------------------
+|  PROP_ID   | SOME |   CLASS_ID    |
+| hasTopping | some | TomatoTopping |
+-------------------------------------
+--------------------
+| DISJOINTCLASSES  |
+| DisjointClasses: |
+--------------------
+--------------------------------------------------------------------------------------------
+|     CLASS_ID      | COMMA |    CLASS_ID    | COMMA |    CLASS_ID     | COMMA | CLASS_ID  |
+| AmericanaHotPizza |   ,   | AmericanaPizza |   ,   | MargheritaPizza |   ,   | SohoPizza |
+--------------------------------------------------------------------------------------------
+----------------
+| INDIVIDUALS  |
+| Individuals: |
+----------------
+------------------------------
+|   INDIVIDUAL_ID    | COMMA |
+| AmericanaHotPizza1 |   ,   |
+------------------------------
+------------------------------
+|   INDIVIDUAL_ID    | COMMA |
+| AmericanaHotPizza2 |   ,   |
+------------------------------
+------------------------------
+|   INDIVIDUAL_ID    | COMMA |
+| AmericanaHotPizza3 |   ,   |
+------------------------------
+-----------------------------
+|       INDIVIDUAL_ID       |
+| ChicagoAmericanaHotPizza1 |
+-----------------------------
+---------------------------
+| CLASS  |    CLASS_ID    |
+| Class: | AmericanaPizza |
+---------------------------
+---------------
+| SUBCLASSOF  |
+| SubClassOf: |
+---------------
+----------------------
+|  CLASS_ID  | COMMA |
+| NamedPizza |   ,   |
+----------------------
+-------------------------------------------------
+|  PROP_ID   | SOME |     CLASS_ID      | COMMA |
+| hasTopping | some | MozzarellaTopping |   ,   |
+-------------------------------------------------
+------------------------------------------------
+|  PROP_ID   | SOME |     CLASS_ID     | COMMA |
+| hasTopping | some | PepperoniTopping |   ,   |
+------------------------------------------------
+-------------------------------------
+|  PROP_ID   | SOME |   CLASS_ID    |
+| hasTopping | some | TomatoTopping |
+-------------------------------------
+--------------------
+| DISJOINTCLASSES  |
+| DisjointClasses: |
+--------------------
+--------------------------------------------------------------------------------------------
+|     CLASS_ID      | COMMA |    CLASS_ID    | COMMA |    CLASS_ID     | COMMA | CLASS_ID  |
+| AmericanaHotPizza |   ,   | AmericanaPizza |   ,   | MargheritaPizza |   ,   | SohoPizza |
+--------------------------------------------------------------------------------------------
+----------------
+| INDIVIDUALS  |
+| Individuals: |
+----------------
+---------------------------
+|  INDIVIDUAL_ID  | COMMA |
+| AmericanaPizza1 |   ,   |
+---------------------------
+-------------------
+|  INDIVIDUAL_ID  |
+| AmericanaPizza2 |
+-------------------
+----------------------------
+| CLASS  |    CLASS_ID     |
+| Class: | MargheritaPizza |
+----------------------------
+---------------
+| SUBCLASSOF  |
+| SubClassOf: |
+---------------
+----------------------
+|  CLASS_ID  | COMMA |
+| NamedPizza |   ,   |
+----------------------
+-------------------------------------------------
+|  PROP_ID   | SOME |     CLASS_ID      | COMMA |
+| hasTopping | some | MozzarellaTopping |   ,   |
+-------------------------------------------------
+---------------------------------------------
+|  PROP_ID   | SOME |   CLASS_ID    | COMMA |
+| hasTopping | some | TomatoTopping |   ,   |
+---------------------------------------------
+---------------------
+|  PROP_ID   | ONLY |
+| hasTopping | only |
+---------------------
+----------------------------------------------------------------------
+| PARENTHESES |     CLASS_ID      | OR |   CLASS_ID    | PARENTHESES |
+|      (      | MozzarellaTopping | or | TomatoTopping |      )      |
+----------------------------------------------------------------------
+--------------------
+| DISJOINTCLASSES  |
+| DisjointClasses: |
+--------------------
+--------------------------------------------------------------------------------------------
+|     CLASS_ID      | COMMA |    CLASS_ID    | COMMA |    CLASS_ID     | COMMA | CLASS_ID  |
+| AmericanaHotPizza |   ,   | AmericanaPizza |   ,   | MargheritaPizza |   ,   | SohoPizza |
+--------------------------------------------------------------------------------------------
+----------------
+| INDIVIDUALS  |
+| Individuals: |
+----------------
+----------------------------
+|  INDIVIDUAL_ID   | COMMA |
+| MargheritaPizza1 |   ,   |
+----------------------------
+--------------------
+|  INDIVIDUAL_ID   |
+| MargheritaPizza2 |
+--------------------
+----------------------
+| CLASS  | CLASS_ID  |
+| Class: | SohoPizza |
+----------------------
+---------------
+| SUBCLASSOF  |
+| SubClassOf: |
+---------------
+----------------------
+|  CLASS_ID  | COMMA |
+| NamedPizza |   ,   |
+----------------------
+-------------------------------------------------
+|  PROP_ID   | SOME |     CLASS_ID      | COMMA |
+| hasTopping | some | MozzarellaTopping |   ,   |
+-------------------------------------------------
+--------------------------------------------
+|  PROP_ID   | SOME |   CLASS_ID   | COMMA |
+| hasTopping | some | OliveTopping |   ,   |
+--------------------------------------------
+-----------------------------------------------
+|  PROP_ID   | SOME |    CLASS_ID     | COMMA |
+| hasTopping | some | ParmesanTopping |   ,   |
+-----------------------------------------------
+---------------------------------------------
+|  PROP_ID   | SOME |   CLASS_ID    | COMMA |
+| hasTopping | some | TomatoTopping |   ,   |
+---------------------------------------------
+---------------------
+|  PROP_ID   | ONLY |
+| hasTopping | only |
+---------------------
+-----------------------------------------------------------------------------------------------------------------
+| PARENTHESES |     CLASS_ID      | OR |   CLASS_ID   | OR |    CLASS_ID     | OR |   CLASS_ID    | PARENTHESES |
+|      (      | MozzarellaTopping | or | OliveTopping | or | ParmesanTopping | or | TomatoTopping |      )      |
+-----------------------------------------------------------------------------------------------------------------
+--------------------
+| DISJOINTCLASSES  |
+| DisjointClasses: |
+--------------------
+--------------------------------------------------------------------------------------------
+|     CLASS_ID      | COMMA |    CLASS_ID    | COMMA |    CLASS_ID     | COMMA | CLASS_ID  |
+| AmericanaHotPizza |   ,   | AmericanaPizza |   ,   | MargheritaPizza |   ,   | SohoPizza |
+--------------------------------------------------------------------------------------------
+----------------
+| INDIVIDUALS  |
+| Individuals: |
+----------------
+-------------------------
+| INDIVIDUAL_ID | COMMA |
+|  SohoPizza1   |   ,   |
+-------------------------
+-----------------
+| INDIVIDUAL_ID |
+|  SohoPizza2   |
+-----------------
+-----------------------
+| CLASS  |  CLASS_ID  |
+| Class: | SpicyPizza |
+-----------------------
+-----------------
+| EQUIVALENTTO  |
+| EquivalentTo: |
+-----------------
+------------
+| CLASS_ID |
+|  Pizza   |
+------------
+---------------------------------------------------------------------------------------------------------------------
+| AND | PARENTHESES |  PROP_ID   | SOME | PARENTHESES |   PROP_ID    | VALUE | CLASS_ID | PARENTHESES | PARENTHESES |
+| and |      (      | hasTopping | some |      (      | hasSpiciness | value |   Hot    |      )      |      )      |
+---------------------------------------------------------------------------------------------------------------------
+----------------------------
+| CLASS  |    CLASS_ID     |
+| Class: | VegetarianPizza |
+----------------------------
+-----------------
+| EQUIVALENTTO  |
+| EquivalentTo: |
+-----------------
+------------
+| CLASS_ID |
+|  Pizza   |
+------------
+-----------------------------------------
+| AND | PARENTHESES |  PROP_ID   | ONLY |
+| and |      (      | hasTopping | only |
+-----------------------------------------
+-----------------------------------------------------------------------------------
+| PARENTHESES |   CLASS_ID    | OR |     CLASS_ID     | PARENTHESES | PARENTHESES |
+|      (      | CheeseTopping | or | VegetableTopping |      )      |      )      |
+-----------------------------------------------------------------------------------
+----------------------
+| CLASS  | CLASS_ID  |
+| Class: | PizzaBase |
+----------------------
+--------------------
+| DISJOINTCLASSES  |
+| DisjointClasses: |
+--------------------
+-------------------------------------------------------
+| CLASS_ID | COMMA | CLASS_ID  | COMMA |   CLASS_ID   |
+|  Pizza   |   ,   | PizzaBase |   ,   | PizzaTopping |
+-------------------------------------------------------
+-------------------------
+| CLASS  |   CLASS_ID   |
+| Class: | PizzaTopping |
+-------------------------
+--------------------
+| DISJOINTCLASSES  |
+| DisjointClasses: |
+--------------------
+-------------------------------------------------------
+| CLASS_ID | COMMA | CLASS_ID  | COMMA |   CLASS_ID   |
+|  Pizza   |   ,   | PizzaBase |   ,   | PizzaTopping |
+-------------------------------------------------------
+----------------------
+| CLASS  | CLASS_ID  |
+| Class: | Spiciness |
+----------------------
+-----------------
+| EQUIVALENTTO  |
+| EquivalentTo: |
+-----------------
+
+| BRACES | CLASS_ID | COMMA | CLASS_ID | COMMA | CLASS_ID | BRACES |
+|   {    |   Hot    |   ,   |  Medium  |   ,   |   Mild   |   }    |
