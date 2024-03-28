@@ -1,6 +1,6 @@
 # Compilador para OWL no formato Manchester Syntax
 
-O objetivo do presente projeto é construir um compilador para a linguagem OWL (Web Ontology Language) no formato Manchester Syntax. O projeto conta atualmente com o analisador léxico (owl.l) e sintático (owl.y).
+O objetivo do presente projeto é construir um compilador para a linguagem OWL (Web Ontology Language) no formato Manchester Syntax. O projeto conta atualmente com o analisador léxico (`owl.l`) e sintático (`owl.y`).
 
 ## Execução
 
@@ -18,11 +18,11 @@ Para executar o programa utilizando o arquivo de teste, execute o comando `./owl
 
 ## VS Code
 
-Caso esteja usando o VS Code, é possível realizar a build do projeto a partir da task definida no arquivo /.vscode/tasks.json.
+Caso esteja usando o VS Code, é possível realizar a build do projeto a partir da task definida no arquivo `/.vscode/tasks.json`.
 
 ## Arquivos de teste
 
-No projeto, estão inclusos dois arquivos de teste: test.txt, contendo a ontologia da pizza, e test2.txt, contendo a ontologia do trabalho de Manoel.
+No projeto, estão inclusos dois arquivos de teste: `test.txt`, contendo a ontologia da pizza, e `test2.txt`, contendo a ontologia do trabalho de Manoel.
 
 ## Saída
 
