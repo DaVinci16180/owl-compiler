@@ -9,6 +9,7 @@
     void yyerror(const char*);
 
     extern char * yytext;
+    extern int yylineno;
     int errors = 0;
 %}
 
@@ -63,7 +64,7 @@ owl     : primitive_class owl
         | enumerated_class owl
         | covered_class owl
         | defined_covered_class owl
-        | error owl { yyerrok; yyclearin; errors++; }
+        | error owl { yyerrok; yyclearin; }
         | /* ε */
         ;
 
@@ -220,8 +221,7 @@ quantifier_conn : quantifier AND quantifier_conn        { $$ = $1 || $3; }
 %%
 
 void yyerror(const char* str) {
-    extern int yylineno;
-
+    errors++;
     cout << endl << "❌ ERRO: " << str << endl;
     cout << "❌ \"" << yytext << "\" na linha " << yylineno << endl;
 }
@@ -229,11 +229,8 @@ void yyerror(const char* str) {
 int main() {
     yyparse();
 
-    cout << endl;
-    if (errors)
-        cout << "⚠️ ";
-    else
-        cout << "✅ ";
-
-    cout << " Compilação finalizada com " << errors << " erros." << endl;
+    cout << endl << (errors ? "⚠️ " : "✅");
+    cout << " Compilação finalizada. ";
+    cout << errors << (errors == 1 ? " classe" : " classes");
+    cout << " com erros." << endl;
 }
