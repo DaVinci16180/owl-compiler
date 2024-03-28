@@ -2,7 +2,7 @@
 
 O objetivo do presente projeto é construir um compilador para a linguagem OWL (Web Ontology Language) no formato Manchester Syntax. O projeto conta atualmente com o analisador léxico (owl.l) e sintático (owl.y).
 
-# Execução
+## Execução
 
 Por conveniência, o arquivo executável do projeto está incluso no diretório raiz. Para executá-lo, basta executar o comando `./owl` na raiz do projeto, ou `./owl < test.txt`, para executar com o arquivo de teste.
 
@@ -24,6 +24,6 @@ Caso esteja usando o VS Code, é possível realizar a build do projeto a partir 
 
 No projeto, estão inclusos dois arquivos de teste: test.txt, contendo a ontologia da pizza, e test2.txt, contendo a ontologia do trabalho de Manoel.
 
-# Saída
+## Saída
 
 A saída será gerada no terminal, composta pela leitura das classes, classificação de seus tipos e possíveis erros.
