@@ -8,8 +8,8 @@
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/Build/analyzer",
-            "args": [],
+            "program": "${workspaceFolder}",
+            "args": ["make"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
@@ -22,7 +22,6 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "make"
         }
     ]
 }

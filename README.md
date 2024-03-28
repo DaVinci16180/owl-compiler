@@ -1,33 +1,29 @@
 # Compilador para OWL no formato Manchester Syntax
 
-O objetivo do presente projeto é construir um compilador para a linguagem OWL (Web Ontology Language) no formato Manchester Syntax. O projeto conta atualmente apenas com o analisador léxico.
+O objetivo do presente projeto é construir um compilador para a linguagem OWL (Web Ontology Language) no formato Manchester Syntax. O projeto conta atualmente com o analisador léxico (owl.l) e sintático (owl.y).
 
 # Execução
 
-Por conveniência, o arquivo executável do projeto está incluso no diretório Build. Para executá-lo, basta executar o comando `Build/analyzer` na raiz do projeto, ou `Build/analyzer < test.txt`, para executar com o arquivo de teste.
+Por conveniência, o arquivo executável do projeto está incluso no diretório raiz. Para executá-lo, basta executar o comando `./owl` na raiz do projeto, ou `./owl < test.txt`, para executar com o arquivo de teste.
 
-Para criar o executável do programa é necessário realizar a build da aplicação usando o Make ou o CMake.
+Para criar o executável do programa é necessário realizar a build da aplicação usando o Make.
 
 ## Make
 
-Para fazer a build usando o make, basta executar o comando `make` na pasta raiz do projeto (onde se encontra o makefile). Após isso, os arquivos-objetos e o programa executável serão criados na pasta raiz do projeto.
+Para fazer a build usando o make, basta executar o comando `make` no diretório raiz do projeto (onde se encontra o makefile). Após isso, o programa executável será criado no mesmo diretório contendo o arquivo makefile.
 
-Para executar o programa, execute o comando `./analyzer` na raiz do projeto. 
+Para executar o programa, execute o comando `./owl` na raiz do projeto. 
 
-Para executar o programa utilizando o arquivo de teste, execute o comando `./analyzer < test.txt` na raiz do projeto. 
-
-## CMake
-
-Para fazer a build usando o CMake, é necessrio executar o comando `cmake ../` no diretório Build (executar o comando `cd ./Build` na raiz do projeto antes do CMake) do projeto. Um arquivo Makefile será criado em Build. Após isso, basta executar o comando `make` no diretório Build para criar o executável.
-
-Para executar o programa, execute o comando `Build/analyzer` na raiz do projeto ou `./analyzer` no diretório Build.
-
-Para executar o programa utilizando o arquivo de teste, execute o comando `Build/analyzer < test.txt` na raiz do projeto ou `./analyzer < ../test.txt` no diretório Build.
+Para executar o programa utilizando o arquivo de teste, execute o comando `./owl < test.txt` na raiz do projeto. 
 
 ## VS Code
 
-Caso esteja usando o VS Code, é possível realizar a build do projeto a partir das tasks definidas no arquivo /.vscode/tasks.json. O arquivo contém a definição de tasks apenas para o CMake.
+Caso esteja usando o VS Code, é possível realizar a build do projeto a partir da task definida no arquivo /.vscode/tasks.json.
+
+## Arquivos de teste
+
+No projeto, estão inclusos dois arquivos de teste: test.txt, contendo a ontologia da pizza, e test2.txt, contendo a ontologia do trabalho de Manoel.
 
 # Saída
 
-A saída será gerada em arquivos de texto no diretório atual (diretório de execução). Serão criados dois arquivos: output.txt, contendo o reconhecimento detalhado da entrada, e statistics.txt, contendo a tabela de tokens e o contador de tokens.
+A saída será gerada no terminal, composta pela leitura das classes, classificação de seus tipos e possíveis erros.
