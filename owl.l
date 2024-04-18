@@ -1,6 +1,8 @@
 %{
     #include "owl.tab.h"
     #include <iostream>
+    #include <stdio.h>
+    #include <string.h>
 %}
 
 %option noyywrap
@@ -27,18 +29,15 @@ symbols             [\{\}\(\)\[\]:,]
 
 {ws}                
 
-some                    return SOME;
-all                     return ALL;
-value                   return VALUE;
-min                     return MIN;
-max                     return MAX;
-exactly                 return EXACTLY;
-that                    return THAT;
-not                     return NOT;
-and                     return AND;
-or                      return OR;
-only                    return ONLY;
-inverse                 return INVERSE;
+some                    { strcpy(yylval.text, yytext); return SOME;     }
+value                   { strcpy(yylval.text, yytext); return VALUE;    }
+min                     { strcpy(yylval.text, yytext); return MIN;      }
+max                     { strcpy(yylval.text, yytext); return MAX;      }
+exactly                 { strcpy(yylval.text, yytext); return EXACTLY;  }
+and                     { strcpy(yylval.text, yytext); return AND;      }
+or                      { strcpy(yylval.text, yytext); return OR;       }
+only                    { strcpy(yylval.text, yytext); return ONLY;     }
+inverse                 { strcpy(yylval.text, yytext); return INVERSE;  }
 
 Class                   return CLASS;
 EquivalentTo            return EQUIVALENTTO;
@@ -47,12 +46,12 @@ SubClassOf              return SUBCLASSOF;
 DisjointClasses         return DISJOINTCLASSES;
 DisjointWith            return DISJOINTWITH;
 
-{prop}                  return PROP_ID;
-{class}                 return CLASS_ID;
-{indiv}                 return INDIVIDUAL_ID;
-{data_type}             return DATA_TYPE;
+{prop}                  { strcpy(yylval.text, yytext); return PROP_ID;       }
+{class}                 { strcpy(yylval.text, yytext); return CLASS_ID;      }
+{indiv}                 { strcpy(yylval.text, yytext); return INDIVIDUAL_ID; }
+{data_type}             { strcpy(yylval.text, yytext); return DATA_TYPE;     }
 
-{number}                return CARDINALITY;
+{number}                { strcpy(yylval.text, yytext); return CARDINALITY;   }
 
 {symbols}               return yytext[0];
 
