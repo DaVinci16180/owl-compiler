@@ -16,7 +16,7 @@ alpha               {upper}|{lower}|_
 
 digit               [0-9]
 int                 {digit}+
-number              {digit}+(\.{digit}+)?
+number              {digit}+\.{digit}+
 
 prop                {lower}{alpha}*
 class               {upper}{alpha}*
@@ -51,7 +51,8 @@ DisjointWith            return DISJOINTWITH;
 {indiv}                 { strcpy(yylval.text, yytext); return INDIVIDUAL_ID; }
 {data_type}             { strcpy(yylval.text, yytext); return DATA_TYPE;     }
 
-{number}                { strcpy(yylval.text, yytext); return CARDINALITY;   }
+{number}                { yylval._float = atof(yytext); return FLOAT;         }
+{digit}                 { yylval.integer = atoi(yytext); return INTEGER;      }
 
 {symbols}               return yytext[0];
 

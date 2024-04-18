@@ -69,6 +69,8 @@
     struct Node* node;
     // struct Node* nodes;
     char text[32];
+    int integer;
+    float _float;
 }
 
 %token <text> SOME
@@ -92,7 +94,8 @@
 %token <text> PROP_ID
 %token <text> INDIVIDUAL_ID
 %token <text> DATA_TYPE
-%token <text> CARDINALITY
+%token <_float> FLOAT
+%token <integer> INTEGER
 %token RELOP
 
 %type <text> class_id
@@ -255,20 +258,24 @@ only            : PROP_ID ONLY class_id                 { addObjProp($1); $$ = N
                 | PROP_ID ONLY '(' logical_conn_c ')'   { addObjProp($1); $$ = NULL; }
                 ;
 
-min             : PROP_ID MIN CARDINALITY class_id      { addObjProp($1); }
+min             : PROP_ID MIN INTEGER class_id          { addObjProp($1); }
                 ;
 
-max             : PROP_ID MAX CARDINALITY class_id      { addObjProp($1); }
+max             : PROP_ID MAX INTEGER class_id          { addObjProp($1); }
                 ;
 
-exactly         : PROP_ID EXACTLY CARDINALITY class_id  { addObjProp($1); }
+exactly         : PROP_ID EXACTLY INTEGER class_id      { addObjProp($1); }
                 ;
 
 value           : PROP_ID VALUE INDIVIDUAL_ID           { addObjProp($1); }
                 ;
 
-data_type       : DATA_TYPE '[' RELOP CARDINALITY ']'
+data_type       : DATA_TYPE '[' RELOP number ']'
                 | DATA_TYPE
+                ;
+
+number          : INTEGER
+                | FLOAT
                 ;
 
 // ===============================================================================================================================
