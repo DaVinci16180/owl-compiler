@@ -52,7 +52,7 @@ DisjointWith            return DISJOINTWITH;
 {data_type}             { strcpy(yylval.text, yytext); return DATA_TYPE;     }
 
 {number}                { yylval._float = atof(yytext); return FLOAT;         }
-{digit}                 { yylval.integer = atoi(yytext); return INTEGER;      }
+{int}                   { yylval.integer = atoi(yytext); return INTEGER;      }
 
 {symbols}               return yytext[0];
 

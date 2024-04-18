@@ -48,26 +48,10 @@
 
         referenceRegistry.push_back(newEntry);
     }
-
-    typedef struct Node {
-        char* name;
-        list<Node*> children;
-    } Node;
-
-    Node* currentRoot = (Node*) malloc(sizeof(Node));
-
-    Node* createNode(char* name) {
-        Node* newEntry = (Node*) malloc(sizeof(Node));
-        newEntry->name = name;
-        newEntry->children = {};
-
-        return newEntry;
-    }
 %}
 
 %union {
-    struct Node* node;
-    // struct Node* nodes;
+    bool closing_nesting;
     char text[32];
     int integer;
     float _float;
@@ -98,11 +82,13 @@
 %token <integer> INTEGER
 %token RELOP
 
-%type <text> class_id
-%type <node> quantifier_list
-%type <node> quantifier
-%type <node> some
-%type <node> only
+%type <closing_nesting> quantifier
+%type <closing_nesting> quantifier_list
+%type <closing_nesting> subclass_of
+%type <closing_nesting> some
+%type <closing_nesting> equivalent_to
+%type <closing_nesting> quantifier_conn
+%type <closing_nesting> logical_conn_p
 
 %nonassoc OR
 %nonassoc AND
@@ -133,12 +119,12 @@ class   : CLASS ':' CLASS_ID {
 // CLASSE COM AXIOMA DE FECHAMENTO ===============================================================================================
 
 primitive_class : class subclass_of disjoint_classes individuals {
-                    // if ($2) cout << endl << "✅ Classe com axioma de fechamento" << endl; 
-                    cout << endl << "✅ Classe primitiva" << endl;
+                    if ($2) cout << endl << "✅ Classe com axioma de fechamento" << endl; 
+                    else cout << endl << "✅ Classe primitiva" << endl;
                 }
                 | class logi_conn_eq_to subclass_of disjoint_classes individuals {
-                    // if ($3) cout << endl << "✅ Classe com axioma de fechamento" << endl; 
-                    cout << endl << "✅ Classe primitiva" << endl;
+                    if ($3) cout << endl << "✅ Classe com axioma de fechamento" << endl; 
+                    else cout << endl << "✅ Classe primitiva" << endl;
                 }
                 ;
 
@@ -147,8 +133,8 @@ primitive_class : class subclass_of disjoint_classes individuals {
 // CLASSE COM DESCRIÇÕES ANINHADAS ===============================================================================================
 
 defined_class   : class equivalent_to disjoint_classes individuals {
-                    // if ($2) cout << endl << "✅ Classe com descrições aninhadas" << endl;
-                    cout << endl << "✅ Classe definida" << endl;
+                    if ($2) cout << endl << "✅ Classe com descrições aninhadas" << endl;
+                    else cout << endl << "✅ Classe definida" << endl;
                 }
                 ;
 
@@ -171,16 +157,12 @@ covered_class   : class logi_conn_eq_to disjoint_classes individuals {
 // ===============================================================================================================================
 // CLAUSULAS =====================================================================================================================
 
-subclass_of     : SUBCLASSOF ':' quantifier_list
-                | SUBCLASSOF ':' class_id ',' quantifier_list {
-                    // for (Node* node : $5->children) {
-                    //     printf("%s\n", node->name);
-                    // }
-                }
-                | SUBCLASSOF ':' class_id
+subclass_of     : SUBCLASSOF ':' quantifier_list                { $$ = $3;    }
+                | SUBCLASSOF ':' class_id ',' quantifier_list   { $$ = $5;    }
+                | SUBCLASSOF ':' class_id                       { $$ = false; }
                 ;
 
-equivalent_to   : EQUIVALENTTO ':' class_id AND logical_conn_p
+equivalent_to   : EQUIVALENTTO ':' class_id AND logical_conn_p  { $$ = $5;    }
                 ;
 
 instance_eq_to  : EQUIVALENTTO ':' '{' individual_list '}'
@@ -189,20 +171,9 @@ instance_eq_to  : EQUIVALENTTO ':' '{' individual_list '}'
 logi_conn_eq_to : EQUIVALENTTO ':' logical_conn_c
                 ;
 
-quantifier_list : quantifier ',' quantifier_list {
-                    // $3->children.push_front($1);
-                    // $$ = $3;
-                    $$ = NULL;
-                }
-                | logical_conn_p ',' quantifier_list { $$ = $3; }
-                | quantifier {
-                    // list<Node*> nodes{$1};
-                    // char name[] = "axioms";
-                    // Node* root = createNode(name);
-                    // root->children = nodes;
-                    // $$ = root;
-                    $$ = NULL;
-                }
+quantifier_list : quantifier ',' quantifier_list                { $$ = $1 || $3; }
+                | logical_conn_p ',' quantifier_list            { $$ = false;    }
+                | quantifier
                 ;
 
 // ===============================================================================================================================
@@ -228,34 +199,24 @@ individual_list : INDIVIDUAL_ID ',' individual_list
 // ===============================================================================================================================
 // QUANTIFICADORES ===============================================================================================================
 
-quantifier      : some
-                | min                { $$ = NULL; }
-                | max                { $$ = NULL; }
-                | exactly            { $$ = NULL; }
-                | value              { $$ = NULL; }
-                | only               { $$ = NULL; }
-                | '(' quantifier ')' { $$ = NULL; }
-                | INVERSE quantifier { $$ = NULL; }
+quantifier      : some                                  { $$ = $1;    }
+                | min                                   { $$ = false; }
+                | max                                   { $$ = false; }
+                | exactly                               { $$ = false; }
+                | value                                 { $$ = false; }
+                | only                                  { $$ = true;  }
+                | '(' quantifier ')'                    { $$ = $2;    }
+                | INVERSE quantifier                    { $$ = $2;    }
                 ;
 
-some            : PROP_ID SOME class_id {
-                    addObjProp($1);
-                    // Node* n1 = createNode($1);
-                    // Node* n2 = createNode($2);
-                    // Node* n3 = createNode($3);
-                    // char some[] = "some";
-                    // Node* root = createNode(some);
-                    // root->children.push_back(n1);
-                    // $$ = root; 
-                    $$ = NULL;
-                }
-                | PROP_ID SOME data_type                { addDataProp($1); $$ = NULL; }
-                | PROP_ID SOME '(' quantifier ')'       { $$ = NULL; }
-                | PROP_ID SOME '(' logical_conn_c ')'   { addObjProp($1); $$ = NULL; }
+some            : PROP_ID SOME class_id                 { addObjProp($1); $$ = false;   }
+                | PROP_ID SOME data_type                { addDataProp($1); $$ = false;  }
+                | PROP_ID SOME '(' quantifier ')'       { $$ = true;                    }
+                | PROP_ID SOME '(' logical_conn_c ')'   { addObjProp($1); $$ = true;    }
                 ;
 
-only            : PROP_ID ONLY class_id                 { addObjProp($1); $$ = NULL; }
-                | PROP_ID ONLY '(' logical_conn_c ')'   { addObjProp($1); $$ = NULL; }
+only            : PROP_ID ONLY class_id                 { addObjProp($1); }
+                | PROP_ID ONLY '(' logical_conn_c ')'   { addObjProp($1); }
                 ;
 
 min             : PROP_ID MIN INTEGER class_id          { addObjProp($1); }
@@ -289,14 +250,14 @@ logical_conn_c  : class_id AND logical_conn_c
 // ===============================================================================================================================
 // CONECTIVOS LÓGICOS - PROPRIEDADE ==============================================================================================
 
-logical_conn_p  : quantifier_conn AND quantifier_conn
-                | quantifier_conn OR quantifier_conn
+logical_conn_p  : quantifier_conn AND quantifier_conn   { $$ = $1 || $3; }
+                | quantifier_conn OR quantifier_conn    { $$ = $1 || $3; }
                 | quantifier_conn
                 ;
 
-quantifier_conn : quantifier AND quantifier_conn
-                | quantifier OR quantifier_conn
-                | '(' quantifier_conn ')'
+quantifier_conn : quantifier AND quantifier_conn        { $$ = $1 || $3; }
+                | quantifier OR quantifier_conn         { $$ = $1 || $3; }
+                | '(' quantifier_conn ')'               { $$ = $2;       }
                 | quantifier
                 ;
 
