@@ -51,7 +51,6 @@
 %}
 
 %union {
-    bool closing_nesting;
     char text[32];
     int integer;
     float _float;
@@ -82,14 +81,6 @@
 %token <integer> INTEGER
 %token RELOP
 
-%type <closing_nesting> quantifier
-%type <closing_nesting> quantifier_list
-%type <closing_nesting> subclass_of
-%type <closing_nesting> some
-%type <closing_nesting> equivalent_to
-%type <closing_nesting> quantifier_conn
-%type <closing_nesting> logical_conn_p
-
 %nonassoc OR
 %nonassoc AND
 
@@ -109,7 +100,7 @@ class_id: CLASS_ID { registerReference($1, yylineno); }
         ;
 
 class   : CLASS ':' CLASS_ID {
-            printf("\n🔷 %s", $3);
+            printf("\n\n🔷 %s", $3);
             addClass($3);
         }
         ;
@@ -119,12 +110,7 @@ class   : CLASS ':' CLASS_ID {
 // CLASSE COM AXIOMA DE FECHAMENTO ===============================================================================================
 
 primitive_class : class subclass_of disjoint_classes individuals {
-                    if ($2) cout << endl << "✅ Classe com axioma de fechamento" << endl; 
-                    else cout << endl << "✅ Classe primitiva" << endl;
-                }
-                | class logi_conn_eq_to subclass_of disjoint_classes individuals {
-                    if ($3) cout << endl << "✅ Classe com axioma de fechamento" << endl; 
-                    else cout << endl << "✅ Classe primitiva" << endl;
+                    cout << endl << "✅ Classe primitiva";
                 }
                 ;
 
@@ -133,8 +119,10 @@ primitive_class : class subclass_of disjoint_classes individuals {
 // CLASSE COM DESCRIÇÕES ANINHADAS ===============================================================================================
 
 defined_class   : class equivalent_to disjoint_classes individuals {
-                    if ($2) cout << endl << "✅ Classe com descrições aninhadas" << endl;
-                    else cout << endl << "✅ Classe definida" << endl;
+                    cout << endl << "✅ Classe definida";
+                }
+                | class logi_conn_eq_to subclass_of disjoint_classes individuals {
+                    cout << endl << "✅ Classe definida";
                 }
                 ;
 
@@ -142,7 +130,7 @@ defined_class   : class equivalent_to disjoint_classes individuals {
 // CLASSE ENUMERADA ==============================================================================================================
 
 enumerated_class: class instance_eq_to disjoint_classes individuals {
-                    cout << endl << "✅ Classe enumerada" << endl;
+                    cout << endl << "✅ Classe enumerada";
                 }
                 ;
                 
@@ -150,19 +138,19 @@ enumerated_class: class instance_eq_to disjoint_classes individuals {
 // CLASSE COBERTA ================================================================================================================
 
 covered_class   : class logi_conn_eq_to disjoint_classes individuals {
-                    cout << endl << "✅ Classe coberta" << endl;
+                    cout << endl << "✅ Classe coberta";
                 }
                 ;
 
 // ===============================================================================================================================
 // CLAUSULAS =====================================================================================================================
 
-subclass_of     : SUBCLASSOF ':' quantifier_list                { $$ = $3;    }
-                | SUBCLASSOF ':' class_id ',' quantifier_list   { $$ = $5;    }
-                | SUBCLASSOF ':' class_id                       { $$ = false; }
+subclass_of     : SUBCLASSOF ':' quantifier_list
+                | SUBCLASSOF ':' class_id ',' quantifier_list
+                | SUBCLASSOF ':' class_id
                 ;
 
-equivalent_to   : EQUIVALENTTO ':' class_id AND logical_conn_p  { $$ = $5;    }
+equivalent_to   : EQUIVALENTTO ':' class_id AND logical_conn_p
                 ;
 
 instance_eq_to  : EQUIVALENTTO ':' '{' individual_list '}'
@@ -171,8 +159,8 @@ instance_eq_to  : EQUIVALENTTO ':' '{' individual_list '}'
 logi_conn_eq_to : EQUIVALENTTO ':' logical_conn_c
                 ;
 
-quantifier_list : quantifier ',' quantifier_list                { $$ = $1 || $3; }
-                | logical_conn_p ',' quantifier_list            { $$ = false;    }
+quantifier_list : quantifier ',' quantifier_list
+                | logical_conn_p ',' quantifier_list
                 | quantifier
                 ;
 
@@ -199,30 +187,30 @@ individual_list : INDIVIDUAL_ID ',' individual_list
 // ===============================================================================================================================
 // QUANTIFICADORES ===============================================================================================================
 
-quantifier      : some                                  { $$ = $1;    }
-                | min                                   { $$ = false; }
-                | max                                   { $$ = false; }
-                | exactly                               { $$ = false; }
-                | value                                 { $$ = false; }
-                | only                                  { $$ = true;  }
-                | '(' quantifier ')'                    { $$ = $2;    }
-                | INVERSE quantifier                    { $$ = $2;    }
+quantifier      : some
+                | min
+                | max
+                | exactly
+                | value
+                | only                                  { cout << endl << "🟢 Axioma de fechamento"; }
+                | '(' quantifier ')'
+                | INVERSE quantifier
                 ;
 
-some            : PROP_ID SOME class_id                 { addObjProp($1); $$ = false;   }
-                | PROP_ID SOME data_type                { addDataProp($1); $$ = false;  }
-                | PROP_ID SOME '(' quantifier ')'       { $$ = true;                    }
-                | PROP_ID SOME '(' logical_conn_c ')'   { addObjProp($1); $$ = true;    }
+some            : PROP_ID SOME class_id                 { addObjProp($1);   }
+                | PROP_ID SOME data_type                { addDataProp($1);  }
+                | PROP_ID SOME '(' quantifier ')'       { cout << endl << "🟢 Descrições aninhadas"; }
+                | PROP_ID SOME '(' logical_conn_c ')'   { addObjProp($1);   }
                 ;
 
-only            : PROP_ID ONLY class_id                 { addObjProp($1); }
-                | PROP_ID ONLY '(' logical_conn_c ')'   { addObjProp($1); }
+only            : PROP_ID ONLY class_id                 { addObjProp($1);   }
+                | PROP_ID ONLY '(' logical_conn_c ')'   { addObjProp($1);   }
                 ;
 
-min             : PROP_ID MIN INTEGER class_id          { addObjProp($1); }
+min             : PROP_ID MIN INTEGER class_id          { addObjProp($1);   }
                 ;
 
-max             : PROP_ID MAX INTEGER class_id          { addObjProp($1); }
+max             : PROP_ID MAX INTEGER class_id          { addObjProp($1);   }
                 ;
 
 exactly         : PROP_ID EXACTLY INTEGER class_id      { addObjProp($1); }
@@ -250,14 +238,14 @@ logical_conn_c  : class_id AND logical_conn_c
 // ===============================================================================================================================
 // CONECTIVOS LÓGICOS - PROPRIEDADE ==============================================================================================
 
-logical_conn_p  : quantifier_conn AND quantifier_conn   { $$ = $1 || $3; }
-                | quantifier_conn OR quantifier_conn    { $$ = $1 || $3; }
+logical_conn_p  : quantifier_conn AND quantifier_conn
+                | quantifier_conn OR quantifier_conn
                 | quantifier_conn
                 ;
 
-quantifier_conn : quantifier AND quantifier_conn        { $$ = $1 || $3; }
-                | quantifier OR quantifier_conn         { $$ = $1 || $3; }
-                | '(' quantifier_conn ')'               { $$ = $2;       }
+quantifier_conn : quantifier AND quantifier_conn
+                | quantifier OR quantifier_conn
+                | '(' quantifier_conn ')'
                 | quantifier
                 ;
 
@@ -268,7 +256,7 @@ quantifier_conn : quantifier AND quantifier_conn        { $$ = $1 || $3; }
 void yyerror(const char* str) {
     errors++;
     cout << endl << "❌ ERRO: " << str << endl;
-    cout << "❌ \"" << yytext << "\" na linha " << yylineno << endl;
+    cout << "❌ \"" << yytext << "\" na linha " << yylineno;
 }
 
 int main() {
@@ -286,7 +274,8 @@ int main() {
 
         if (!found){
             errors++;
-            cout << "❌ Classe " << reference->name << " não declarada referenciada na linha " << reference->line << endl;
+            cout << endl << "❌ ERRO: reference error";
+            cout << endl << "❌ Classe " << reference->name << " não declarada referenciada na linha " << reference->line << endl;
         }
     }
 
